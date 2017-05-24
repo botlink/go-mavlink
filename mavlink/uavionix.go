@@ -20,8 +20,8 @@ import (
 // I'll give you one guess as to what you hand-built UAS pieced together from
 // the lowest cost components you could find is certified to
 const (
-	// SDAUnknown indicates that the systems connected to the ADS-B of an
-	// unknown or unacceptable
+	// SDAUnknown indicates that the systems connected to the ADS-B is of an
+	// unknown or unacceptable System Design Assurance level
 	SDAUnknown = 0x00
 	// SDAMinor indicates that the systems connected to the ADS-B are certified to
 	// the SDA Minor level
@@ -94,7 +94,7 @@ const (
 	ADSBInput1090 = 0x10
 	// ADSBInput978 indicates that the air vehicle can receive ADS-B messages on
 	// the 978 MHz band
-	ADSBInput978 = 0x020
+	ADSBInput978 = 0x20
 )
 
 const (
@@ -102,7 +102,7 @@ const (
 	// width are not known
 	AircraftSizeLengthWidthUnknown = 0x00
 	// AircraftSizeLength15Width23 indicates that the aircraft has a fuselage less
-	// than 15 meters long and a wingspan of less than 23 meters
+	// Aircraft 15 meters or less long and a wingspan of less than 23 meters
 	AircraftSizeLength15Width23 = 0x01
 	// AircraftSizeLength25Width28p5 indicates that the aircraft has a fuselage less
 	// than 15 meters long and a wingspan of less than 23 meters
@@ -265,7 +265,7 @@ const (
 	EmitterTypeSurfaceService = 0x12
 	// EmitterTypePointObstacle indicates that the sending object is a ground
 	// obstacle
-	EmitterTypePointObstacle = 0x013
+	EmitterTypePointObstacle = 0x13
 )
 
 const (
