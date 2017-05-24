@@ -1,0 +1,399 @@
+<?xml version='1.0'?>
+<mavlink>
+    <include>common.xml</include>
+    <enums>
+      <enum name="UAVIONIX_SDA_LEVEL">
+        <description>System Design Assurance Level. Indicates the probability per hour of a misleading ADS-B transmission</description>
+        <entry value="0" name="UAVIONIX_SDA_LEVEL_UNKNOWN">
+          <description>Probability greater than 1x10^-3 per hour</description>
+        </entry>
+        <entry value="1" name="UAVIONIX_SDA_LEVEL_MINOR">
+          <description>Probability less than or equal to 1x10^-3 per hour</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_SDA_LEVEL_MAJOR">
+          <description>Probability less than or equal to 1x10^-5 per hour</description>
+        </entry>
+        <entry value="3" name="UAVIONIX_SDA_LEVEL_HAZARDOUS">
+          <description>Probability less than or equal to 1x10^-7 per hour</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_SIL_LEVEL">
+        <description>Source Integrity Level. Indicates the probability that the aircraft position accuracy is less than normal.</description>
+        <entry value="0" name="UAVIONIX_SIL_LEVEL_UNKNOWN">
+          <description>Probability greater than 1x10^-3 per hour</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_SIL_LEVEL_MINOR">
+          <description>Probability less than or equal to 1x10^-3 per hour</description>
+        </entry>
+        <entry value="8" name="UAVIONIX_SIL_LEVEL_MAJOR">
+          <description>Probability less than or equal to 1x10^-5 per hour</description>
+        </entry>
+        <entry value="12" name="UAVIONIX_SIL_LEVEL_HAZARDOUS">
+          <description>Probability less than or equal to 1x10^-7 per hour</description>
+        </entry>
+        <entry value="16" name="UAVIONIX_SIL_LEVEL_CSID">
+          <description>Unknown</description>
+        </entry>
+        <entry value="32" name="UAVIONIX_SIL_LEVEL_FORCE_GNSS_ALTITUDE">
+          <description>Force use of GNSS altitude</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_VEHICLE_CAPABILITY">
+        <description>Performace characteristics of the vehicle.</description>
+        <entry value="0" name="UAVIONIX_VEHICLE_CAPABILITY_MAX_SPEED_UNKNOWN">
+          <description>Max speed of the vehicle is unknown</description>
+        </entry>
+        <entry value="1" name="UAVIONIX_VEHICLE_CAPABILITY_MAX_SPEED_LT75">
+          <description>Max speed of the vehicle is less than 75 knots</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_VEHICLE_CAPABILITY_MAX_SPEED_LT150">
+          <description>Max speed of the vehicle is less than 150 knots</description>
+        </entry>
+        <entry value="3" name="UAVIONIX_VEHICLE_CAPABILITY_MAX_SPEED_LT300">
+          <description>Max speed of the vehicle is less than 300 knots</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_VEHICLE_CAPABILITY_MAX_SPEED_LT600">
+          <description>Max speed of the vehicle is less than 600 knots</description>
+        </entry>
+        <entry value="5" name="UAVIONIX_VEHICLE_CAPABILITY_MAX_SPEED_LT1200">
+          <description>Max speed of the vehicle is less than 1200 knots</description>
+        </entry>
+        <entry value="6" name="UAVIONIX_VEHICLE_CAPABILITY_MAX_SPEED_GT1200">
+          <description>Max speed of the vehicle is greater than 1200 knots</description>
+        </entry>
+        <entry value="16" name="UAVIONIX_VEHICLE_CAPABILITY_ADSB_INPUT_1090MHZ">
+          <description>Indicates that the air vehicle can receive ADS-B messages on 1090MHZ bands</description>
+        </entry>
+        <entry value="32" name="UAVIONIX_VEHICLE_CAPABILITY_ADSB_INPUT_UAT">
+          <description>Indicates that the air vehicle can receive ADS-B messages on UAT bands</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_AIRCRAFT_SIZE">
+        <description>Size of the aircraft.</description>
+        <entry value="0" name="UAVIONIX_AIRCRAFT_SIZE_UNKNOWN">
+          <description>Aircraft length and wingspan are unknown</description>
+        </entry>
+        <entry value="1" name="UAVIONIX_AIRCRAFT_SIZE_L15_W23">
+          <description>Aircraft is 15 meters or less long and a wingspan of less than 23 meters</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_AIRCRAFT_SIZE_L25_W28P5">
+          <description>Aircraft is 25 meters or less long and a wingspan of less than 28.5 meters</description>
+        </entry>
+        <entry value="3" name="UAVIONIX_AIRCRAFT_SIZE_L25_W34">
+          <description>Aircraft is 25 meters or less long and a wingspan of less than 34 meters</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_AIRCRAFT_SIZE_L35_W33">
+          <description>Aircraft is 35 meters or less long and a wingspan of less than 33 meters</description>
+        </entry>
+        <entry value="5" name="UAVIONIX_AIRCRAFT_SIZE_L35_W38">
+          <description>Aircraft is 35 meters or less long and a wingspan of less than 38 meters</description>
+        </entry>
+        <entry value="6" name="UAVIONIX_AIRCRAFT_SIZE_L45_W39P5">
+          <description>Aircraft is 45 meters or less long and a wingspan of less than 39.5 meters</description>
+        </entry>
+        <entry value="7" name="UAVIONIX_AIRCRAFT_SIZE_L45_W45">
+          <description>Aircraft is 45 meters or less long and a wingspan of less than 45 meters</description>
+        </entry>
+        <entry value="8" name="UAVIONIX_AIRCRAFT_SIZE_L55_W45">
+          <description>Aircraft is 55 meters or less long and a wingspan of less than 45 meters</description>
+        </entry>
+        <entry value="9" name="UAVIONIX_AIRCRAFT_SIZE_L55_W52">
+          <description>Aircraft is 55 meters or less long and a wingspan of less than 52 meters</description>
+        </entry>
+        <entry value="10" name="UAVIONIX_AIRCRAFT_SIZE_L65_W62P5">
+          <description>Aircraft is 65 meters or less long and a wingspan of less than 62.5 meters</description>
+        </entry>
+        <entry value="11" name="UAVIONIX_AIRCRAFT_SIZE_L65_W67">
+          <description>Aircraft is 65 meters or less long and a wingspan of less than 67 meters</description>
+        </entry>
+        <entry value="12" name="UAVIONIX_AIRCRAFT_SIZE_L75_W72P5">
+          <description>Aircraft is 75 meters or less long and a wingspan of less than 72.5 meters</description>
+        </entry>
+        <entry value="13" name="UAVIONIX_AIRCRAFT_SIZE_L75_W80">
+          <description>Aircraft is 75 meters or less long and a wingspan of less than 80 meters</description>
+        </entry>
+        <entry value="14" name="UAVIONIX_AIRCRAFT_SIZE_L85_W80">
+          <description>Aircraft is 85 meters or less long and a wingspan of less than 80 meters</description>
+        </entry>
+        <entry value="15" name="UAVIONIX_AIRCRAFT_SIZE_L85_W90">
+          <description>Aircraft is 85 meters or less long and a wingspan of less than 90 meters</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_GPS_OFFSET">
+        <description>Indicates the offset of the GPS from nose and centerline.</description>
+        <entry value="0" name="UAVIONIX_GPS_OFFSET_LATERAL_UNKNOWN">
+          <description>Unknown lateral offset</description>
+        </entry>
+        <entry value="1" name="UAVIONIX_GPS_OFFSET_LATERAL_LEFT_2">
+          <description>Lateral offset left 2 meters</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_GPS_OFFSET_LATERAL_LEFT_4">
+          <description>Lateral offset left 4 meters</description>
+        </entry>
+        <entry value="3" name="UAVIONIX_GPS_OFFSET_LATERAL_LEFT_6">
+          <description>Lateral offset left 6 meters</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_GPS_OFFSET_LATERAL_RIGHT_0">
+          <description>Lateral offset right 0 meters</description>
+        </entry>
+        <entry value="5" name="UAVIONIX_GPS_OFFSET_LATERAL_RIGHT_2">
+          <description>Lateral offset right 2 meters</description>
+        </entry>
+        <entry value="6" name="UAVIONIX_GPS_OFFSET_LATERAL_RIGHT_4">
+          <description>Lateral offset right 4 meters</description>
+        </entry>
+        <entry value="7" name="UAVIONIX_GPS_OFFSET_LATERAL_RIGHT_6">
+          <description>Lateral offset right 6 meters</description>
+        </entry>
+        <entry value="0" name="UAVIONIX_GPS_OFFSET_LONGITUDINAL_UNKNOWN">
+          <description>Longitudinal offset unknown</description>
+        </entry>
+        <entry value="1" name="UAVIONIX_GPS_OFFSET_LONGITUDINAL_SENSOR_CALIBRATED">
+          <description>Longitudinal offset applied by sensor</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_STATUS">
+        <description>Uavionix ADS-B system status</description>
+        <entry value="0" name="UAVIONIX_STATUS_INITIALIZING">
+          <description>The module is initializing</description>
+        </entry>
+        <entry value="1" name="UAVIONIX_STATUS_OK">
+          <description>The module is operating normally</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_STATUS_TX_FAIL_1090">
+          <description>The module can't transmit on 1090 MHZ</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_STATUS_RX_FAIL_1090">
+          <description>The module can't receive on 1090 MHZ</description>
+        </entry>
+        <entry value="8" name="UAVIONIX_STATUS_TX_FAIL_UAT">
+          <description>The module can't transmit on UAT bands</description>
+        </entry>
+        <entry value="16" name="UAVIONIX_STATUS_RX_FAIL_UAT">
+          <description>The module can't receive on UAT bands</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_ALTITUDE_TYPE">
+        <description>Altitude source for vehicle</description>
+        <entry value="0" name="UAVIONIX_ALTITUDE_PRESSURE">
+          <description>Altitude above mean sea level from the barometer</description>
+        </entry>
+        <entry value="0" name="UAVIONIX_ALTITUDE_GNSS">
+          <description>Altitude above the WGS84 ellipsoid from the GNSS</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_EMITTER_AIRCRAFT_TYPE">
+        <description>ADS-B emitter vehicle type</description>
+        <entry value="0" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_UNKNOWN">
+          <description>Emitter vehicle type unknown</description>
+        </entry>
+        <entry value="1" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_LIGHT">
+          <description>Emitter vehicle type light</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_SMALL">
+          <description>Emitter vehicle type small</description>
+        </entry>
+        <entry value="3" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_LARGE">
+          <description>Emitter vehicle type large</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_LARGE_HIGH_VORTEX">
+          <description>Emitter vehicle type large with high vortex</description>
+        </entry>
+        <entry value="5" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_HEAVY">
+          <description>Emitter vehicle type heavy</description>
+        </entry>
+        <entry value="6" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_HIGHLY_MANEUVERABLE">
+          <description>Emitter vehicle type highly maneuverable</description>
+        </entry>
+        <entry value="7" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_ROTOCRAFT">
+          <description>Emitter vehicle type rotocraft</description>
+        </entry>
+        <entry value="8" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_UNASSIGNED1">
+          <description>Emitter vehicle type unassigned</description>
+        </entry>
+        <entry value="9" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_GLIDER">
+          <description>Emitter vehicle type glider</description>
+        </entry>
+        <entry value="10" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_LIGHTER_THAN_AIR">
+          <description>Emitter vehicle type lighter than air</description>
+        </entry>
+        <entry value="11" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_PARACHUTE">
+          <description>Emitter vehicle type parachute</description>
+        </entry>
+        <entry value="12" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_ULTRALIGHT">
+          <description>Emitter vehicle type ultralight</description>
+        </entry>
+        <entry value="13" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_UNASSIGNED2">
+          <description>Emitter vehicle type unassigned</description>
+        </entry>
+        <entry value="14" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_UAV">
+          <description>Emitter vehicle type UAV</description>
+        </entry>
+        <entry value="15" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_SPACE">
+          <description>Emitter vehicle type space</description>
+        </entry>
+        <entry value="16" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_UNASSIGNED3">
+          <description>Emitter vehicle type unassigned</description>
+        </entry>
+        <entry value="17" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_SURFACE_EMERGENCY">
+          <description>Emitter vehicle type surface emergency</description>
+        </entry>
+        <entry value="18" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_SURFACE_SERVICE">
+          <description>Emitter vehicle type surface service</description>
+        </entry>
+        <entry value="19" name="UAVIONIX_EMITTER_AIRCRAFT_TYPE_POINT_OBSTACLE">
+          <description>Emitter vehicle type point obstacle</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_VALID_FLAG">
+        <description>Valid bits for data transmitted or received</description>
+        <entry value="1" name="UAVIONIX_VALID_FLAG_LATLON">
+          <description>Latitude and longitude are valid</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_VALID_FLAG_ALT">
+          <description>Altitude valid</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_VALID_FLAG_HEADING">
+          <description>Heading valid</description>
+        </entry>
+        <entry value="8" name="UAVIONIX_VALID_FLAG_VELOCITY">
+          <description>Velocity valid</description>
+        </entry>
+        <entry value="16" name="UAVIONIX_VALID_FLAG_CALLSIGN">
+          <description>Callsign valid</description>
+        </entry>
+        <entry value="32" name="UAVIONIX_VALID_FLAG_IDENT">
+          <description>Ident valid</description>
+        </entry>
+        <entry value="64" name="UAVIONIX_VALID_FLAG_SIMULATED">
+          <description>Simulated data</description>
+        </entry>
+        <entry value="128" name="UAVIONIX_VALID_FLAG_VERTICAL_VELOCITY">
+          <description>Vertical velocity valid</description>
+        </entry>
+        <entry value="256" name="UAVIONIX_VALID_FLAG_BAROMETER">
+          <description>Barometer valid</description>
+        </entry>
+        <entry value="32768" name="UAVIONIX_VALID_FLAG_BAROMETER">
+          <description>UAT transponder valid</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_AIRCRAFT_STATE">
+        <description>State of the aircraft</description>
+        <entry value="1" name="UAVIONIX_AIRCRAFT_STATE_INTENT_CHANGE">
+          <description>Intent to change course/altitude/speed</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_AIRCRAFT_STATE_AP_ENABLED">
+          <description>Autopilot enabled</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_AIRCRAFT_STATE_BAROMETER_CROSSCHECK_ENABLED">
+          <description>Altitude source cross check</description>
+        </entry>
+        <entry value="8" name="UAVIONIX_AIRCRAFT_STATE_ON_GROUND">
+          <description>On the ground</description>
+        </entry>
+        <entry value="16" name="UAVIONIX_AIRCRAFT_STATE_IDENT">
+          <description>Ident for ATC</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_AIRCRAFT_CONTROL">
+        <description>ATC communication and control systems</description>
+        <entry value="0" name="UAVIONIX_AIRCRAFT_CONTROL_STANDBY">
+          <description>Systems on standby</description>
+        </entry>
+        <entry value="1" name="UAVIONIX_AIRCRAFT_CONTROL_RX_ONLY">
+          <description>Systems only able to receive, not transmit</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_AIRCRAFT_CONTROL_TX1090_ENABLED">
+          <description>Systems broadcasting on 1090MHZ</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_AIRCRAFT_CONTROL_TXUAT_ENABLE">
+          <description>Systems broadcasting on UAT bands</description>
+        </entry>
+        <entry value="8" name="UAVIONIX_AIRCRAFT_CONTROL_MODEA_ENABLE">
+          <description>Systems broadcasting Mode A identifier</description>
+        </entry>
+        <entry value="16" name="UAVIONIX_AIRCRAFT_CONTROL_MODEC_ENABLE">
+          <description>Systems broadcasting Mode C identifier</description>
+        </entry>
+        <entry value="32" name="UAVIONIX_AIRCRAFT_CONTROL_MODES_ENABLE">
+          <description>Systems broadcasting Mode S identifier</description>
+        </entry>
+      </enum>
+      <enum name="UAVIONIX_GPS_FIX_TYPE">
+        <description>GPS fix type</description>
+        <entry value="0" name="UAVIONIX_GPS_FIX_TYPE_NONE1">
+          <description>No fix</description>
+        </entry>
+        <entry value="1" name="UAVIONIX_GPS_FIX_TYPE_NONE2">
+          <description>No fix</description>
+        </entry>
+        <entry value="2" name="UAVIONIX_GPS_FIX_TYPE_GPS2D">
+          <description>2D Fix</description>
+        </entry>
+        <entry value="3" name="UAVIONIX_GPS_FIX_TYPE_GPS3D">
+          <description>3D Fix</description>
+        </entry>
+        <entry value="4" name="UAVIONIX_GPS_FIX_TYPE_GPSDIFF">
+          <description>Differential GPS system fix</description>
+        </entry>
+        <entry value="5" name="UAVIONIX_GPS_FIX_TYPE_GPSRTK">
+          <description>RTK GPS system fix</description>
+        </entry>
+      </enum>
+    </enums>
+    <messages>
+        <message id="246" name="TRAFFIC_REPORT">
+            <description>Describes other air traffic around the UAV</description>
+            <field type="uint32_t" name="icao_address">ICAO Address</field>
+            <field type="int32_t" name="lat">The reported latitude in degrees * 1E7</field>
+            <field type="int32_t" name="lon">The reported longitude in degrees * 1E7</field>
+            <field type="int32_t" name="altitude">Altitude in Meters * 1E3 (up is +ve) - Check ALT_TYPE for reference datum</field>
+            <field type="uint16_t" name="cog">Course over ground in degrees * 10^2</field>
+            <field type="uint16_t" name="hor_velocity">The horizontal velocity in (m/s * 1E2)</field>
+            <field type="int16_t" name="ver_velocity">The vertical velocity in (m/s * 1E2)</field>
+            <field type="uint16_t" name="validFlags">Valid data fields</field>
+            <field type="uint16_t" name="squawk">Mode A Squawk code (0xFFFF = no code)</field>
+            <field type="uint8_t" name="altitude_type">Altitude Type</field>
+            <field type="int16_t[9]" name="callsign">The callsign</field>
+            <field type="uint8_t" name="emitter_type">Emitter Category</field>
+            <field type="uint8_t" name="tslc">Time since last communication in seconds</field>
+        </message>
+        <message id="203" name="UAVIONIX_STATUS">
+            <description>Describes the status of the Uavionix ADS-B transponder</description>
+            <field type="uint8_t" name="status">Self test status</field>
+        </message>
+        <message id="202" name="OWN_SHIP_DYNAMIC">
+            <description>Describes aircraft data that changes frequently</description>
+            <field type="uint32_t" name="utcTime">UTC time in since GPS epoch (in s since Jan 6, 1980). If unknown set to UINT32_MAX</field>
+            <field type="int32_t" name="lat">The reported latitude in degrees * 1E7.  If unknown set to INT32_MAX</field>
+            <field type="int32_t" name="lon">The reported longitude in degrees * 1E7.  If unknown set to INT32_MAX</field>
+            <field type="int32_t" name="altPres">Barometric pressure altitude relative to a standard atmosphere of 1013.2 mBar and NOT bar corrected altitude (meters * 1E3) UP +ve. If unknown set to INT32_MAX</field>
+            <field type="int32_t" name="altGNSS">Altitude (meters * 1E3). (up +ve). WGS84 altitude. If unknown set to INT32_MAX</field>
+            <field type="uint32_t" name="accHoriz">Horizontal accuracy(HFOM) (mm). If unknown set to UINT32_MAX</field>
+            <field type="uint16_t" name="accVert">Vertical accuracy(VFOM) (cm). If unknown set to UINT16_MAX</field>
+            <field type="uint16_t" name="accVel">Velocity accuracy (m/s * 1E3). If unknown set to UINT16_MAX.</field>
+            <field type="int16_t" name="velVert">GPS vertical speed (m/s * 1E2). If unknown set to INT16_MAX.</field>
+            <field type="int16_t" name="nsVog">North-South velocity over ground (m/s * 1E2) North +ve. If unknown set to INT16_MAX.</field>
+            <field type="int16_t" name="ewVog">East-West velocity over ground (m/s * 1E2) East +ve. If unknown set to INT16_MAX.</field>
+            <field type="uint16_t" name="state">ADS-B input flags</field>
+            <field type="uint16_t" name="squawk">Mode A code (typically 1200 [0x04B0] for VFR)</field>
+            <field type="uint8_t" name="fixType">GPS Fix.</field>
+            <field type="uint8_t" name="numSats">Number of satellites visible. If unknown set to UINT8_MAX.</field>
+            <field type="uint8_t" name="emStatus">Emergency status (table 2-78 of DO-260B).</field>
+            <field type="uint8_t" name="control">ADS-B transponder dynamic input control flags</field>
+        </message>
+        <message id="201" name="OWN_SHIP_STATIC">
+            <description>Describes aircraft data that changes less frequently</description>
+            <field type="uint8_t[3]" name="ICAO">Vehicle address (24 bits). Byte[2] = msByte</field>
+            <field type="uint8_t" name="integrity">System Integrity and Design Assurance</field>
+            <field type="uint16_t" name="stallSpeed">Aircraft stall speed in cm/s.</field>
+            <field type="uint8_t[8]" name="callsign">Vehicle identifier (8 characters, valid characters are A-Z, 0-9, " " only).</field>
+            <field type="uint8_t" name="capability">Max Aircraft Speed and ADS-B in capability</field>
+            <field type="uint8_t" name="emitter">Transmitting vehicle type. </field>
+            <field type="uint8_t" name="alwEncode">Aircraft length and width encoding (table 2-35 of DO-282B). Upper Bound</field>
+            <field type="uint8_t" name="gpsLatOffs">GPS antenna lateral offset (table 2-36 of DO-282B). </field>
+            <field type="uint8_t" name="gpsLonOffs">GPS antenna longitudinal offset from nose [if non-zero, take position (in meters) divide by 2 and add one with max 60m] (table 2-37 DO-282B).</field>
+        </message>
+    </messages>
+</mavlink>
