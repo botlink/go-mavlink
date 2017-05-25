@@ -335,57 +335,71 @@ func (self *OwnShipDynamic) Unpack(p *Packet) error {
 	return nil
 }
 
-// Describes aircraft data that changes less frequently
+// OwnShipStatic represents aircraft data that changes infrequently
 type OwnShipStatic struct {
-	Stallspeed uint16   // Aircraft stall speed in cm/s.
-	Icao       [3]uint8 // Vehicle address (24 bits). Byte[2] = msByte
-	Integrity  uint8    // System Integrity and Design Assurance
-	Callsign   [8]byte  // Vehicle identifier (8 characters, valid characters are A-Z, 0-9, " " only).
-	Capability uint8    // Max Aircraft Speed and ADS-B in capability
-	Emitter    uint8    // Transmitting vehicle type.
-	Alwencode  uint8    // Aircraft length and width encoding (table 2-35 of DO-282B). Upper Bound
-	Gpslatoffs uint8    // GPS antenna lateral offset (table 2-36 of DO-282B).
-	Gpslonoffs uint8    // GPS antenna longitudinal offset from nose [if non-zero, take position (in meters) divide by 2 and add one with max 60m] (table 2-37 DO-282B).
+	ICAOAddress           [3]uint8
+	Integrity             uint8
+	StallSpeed            uint16
+	Callsign              [8]byte
+	Capability            uint8
+	Emitter               uint8
+	ALWEncoded            uint8
+	GPSLateralOffset      uint8
+	GPSLongitudinalOffset uint8
 }
 
+// MsgID returns the message ID of the OwnShipStatic message
 func (self *OwnShipStatic) MsgID() uint8 {
 	return 201
 }
 
+// MsgName returns the message name of the OwnShipStatic message
 func (self *OwnShipStatic) MsgName() string {
 	return "OwnShipStatic"
 }
 
-func (self *OwnShipStatic) Pack(p *Packet) error {
-	payload := make([]byte, 19)
-	binary.LittleEndian.PutUint16(payload[0:], uint16(self.Stallspeed))
-	copy(payload[2:], self.Icao[:])
-	payload[5] = byte(self.Integrity)
-	copy(payload[6:], self.Callsign[:])
-	payload[14] = byte(self.Capability)
-	payload[15] = byte(self.Emitter)
-	payload[16] = byte(self.Alwencode)
-	payload[17] = byte(self.Gpslatoffs)
-	payload[18] = byte(self.Gpslonoffs)
-
-	p.MsgID = self.MsgID()
-	p.Payload = payload
-	return nil
-}
-
+// Unpack parses the contents of the packet into the fields of the OwnShipStatic
+// message
 func (self *OwnShipStatic) Unpack(p *Packet) error {
 	if len(p.Payload) < 19 {
 		return fmt.Errorf("payload too small")
 	}
-	self.Stallspeed = uint16(binary.LittleEndian.Uint16(p.Payload[0:]))
-	copy(self.Icao[:], p.Payload[2:5])
-	self.Integrity = uint8(p.Payload[5])
-	copy(self.Callsign[:], p.Payload[6:14])
+
+	copy(self.ICAOAddress[:], p.Payload[0:2])
+
+	self.Integrity = uint8(p.Payload[3])
+	self.StallSpeed = binary.LittleEndian.Uint16(p.Payload[4:])
+
+	copy(self.Callsign[:], p.Payload[6:13])
+
 	self.Capability = uint8(p.Payload[14])
 	self.Emitter = uint8(p.Payload[15])
-	self.Alwencode = uint8(p.Payload[16])
-	self.Gpslatoffs = uint8(p.Payload[17])
-	self.Gpslonoffs = uint8(p.Payload[18])
+	self.ALWEncoded = uint8(p.Payload[16])
+	self.GPSLateralOffset = uint8(p.Payload[17])
+	self.GPSLongitudinalOffset = uint8(p.Payload[18])
+
+	return nil
+}
+
+// Pack returns a byte-array representation of the the OwnShipStatic message
+func (self *OwnShipStatic) Pack(p *Packet) error {
+	payload := make([]byte, 19)
+
+	copy(payload[0:], self.ICAOAddress[:])
+
+	payload[3] = byte(self.Integrity)
+	binary.LittleEndian.PutUint16(payload[4:], self.StallSpeed)
+
+	copy(payload[6:], self.Callsign[:])
+
+	payload[14] = byte(self.Capability)
+	payload[15] = byte(self.Emitter)
+	payload[16] = byte(self.ALWEncoded)
+	payload[17] = byte(self.GPSLateralOffset)
+	payload[18] = byte(self.GPSLongitudinalOffset)
+
+	p.MsgID = self.MsgID()
+	p.Payload = payload
 	return nil
 }
 
