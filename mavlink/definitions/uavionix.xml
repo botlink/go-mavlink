@@ -274,7 +274,7 @@
         <entry value="256" name="UAVIONIX_VALID_FLAG_BAROMETER">
           <description>Barometer valid</description>
         </entry>
-        <entry value="32768" name="UAVIONIX_VALID_FLAG_BAROMETER">
+        <entry value="32768" name="UAVIONIX_VALID_FLAG_UAT">
           <description>UAT transponder valid</description>
         </entry>
       </enum>
@@ -345,17 +345,17 @@
     <messages>
         <message id="246" name="TRAFFIC_REPORT">
             <description>Describes other air traffic around the UAV</description>
-            <field type="uint32_t" name="icao_address">ICAO Address</field>
+            <field type="uint32_t" name="ICAO_address">ICAO Address</field>
             <field type="int32_t" name="lat">The reported latitude in degrees * 1E7</field>
             <field type="int32_t" name="lon">The reported longitude in degrees * 1E7</field>
             <field type="int32_t" name="altitude">Altitude in Meters * 1E3 (up is +ve) - Check ALT_TYPE for reference datum</field>
-            <field type="uint16_t" name="cog">Course over ground in degrees * 10^2</field>
+            <field type="uint16_t" name="heading">Course over ground in degrees * 10^2</field>
             <field type="uint16_t" name="hor_velocity">The horizontal velocity in (m/s * 1E2)</field>
             <field type="int16_t" name="ver_velocity">The vertical velocity in (m/s * 1E2)</field>
             <field type="uint16_t" name="validFlags">Valid data fields</field>
             <field type="uint16_t" name="squawk">Mode A Squawk code (0xFFFF = no code)</field>
             <field type="uint8_t" name="altitude_type">Altitude Type</field>
-            <field type="int16_t[9]" name="callsign">The callsign</field>
+            <field type="char[9]" name="callsign">The callsign</field>
             <field type="uint8_t" name="emitter_type">Emitter Category</field>
             <field type="uint8_t" name="tslc">Time since last communication in seconds</field>
         </message>
@@ -388,7 +388,7 @@
             <field type="uint8_t[3]" name="ICAO">Vehicle address (24 bits). Byte[2] = msByte</field>
             <field type="uint8_t" name="integrity">System Integrity and Design Assurance</field>
             <field type="uint16_t" name="stallSpeed">Aircraft stall speed in cm/s.</field>
-            <field type="uint8_t[8]" name="callsign">Vehicle identifier (8 characters, valid characters are A-Z, 0-9, " " only).</field>
+            <field type="char[8]" name="callsign">Vehicle identifier (8 characters, valid characters are A-Z, 0-9, " " only).</field>
             <field type="uint8_t" name="capability">Max Aircraft Speed and ADS-B in capability</field>
             <field type="uint8_t" name="emitter">Transmitting vehicle type. </field>
             <field type="uint8_t" name="alwEncode">Aircraft length and width encoding (table 2-35 of DO-282B). Upper Bound</field>
