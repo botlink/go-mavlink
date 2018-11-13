@@ -20,6 +20,13 @@ const (
 	DATA_TYPE_KINECT     = 3 //
 )
 
+// MavCmd:
+const (
+	MAV_CMD_DO_START_SEARCH  = 0 // Starts a search
+	MAV_CMD_DO_FINISH_SEARCH = 1 // Starts a search
+	MAV_CMD_NAV_SWEEP        = 2 // Starts a search
+)
+
 //
 type SetCamShutter struct {
 	Gain       float32 // Camera gain
